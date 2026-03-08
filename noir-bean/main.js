@@ -114,6 +114,37 @@ scrollToTopBtn.addEventListener('click', () => {
   });
 });
 
+// --- Mobile Navigation Logic ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenuOverlay = document.getElementById('mobile-menu');
+const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+const mobileLangToggle = document.getElementById('mobile-lang-toggle');
+const mobileOrderBtn = document.getElementById('mobile-order-btn');
+
+function openMobileMenu() {
+  mobileMenuOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeMobileMenu() {
+  mobileMenuOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+mobileMenuBtn.addEventListener('click', openMobileMenu);
+closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+
+mobileNavLinks.forEach(link => {
+  link.addEventListener('click', closeMobileMenu);
+});
+
+mobileOrderBtn.addEventListener('click', () => {
+  closeMobileMenu();
+  orderBtn.click(); // Trigger the main order button logic
+});
+
+
 // --- Premium Booking Flow Logic ---
 const modal = document.getElementById('order-modal');
 const orderBtn = document.getElementById('order-btn');
@@ -446,9 +477,10 @@ if (contactForm) {
 const langToggle = document.getElementById('lang-toggle');
 let currentLang = 'en';
 
-langToggle.addEventListener('click', () => {
-  currentLang = currentLang === 'en' ? 'ru' : 'en';
-  langToggle.textContent = currentLang === 'en' ? 'RU' : 'EN';
+function applyLanguage() {
+  const toggleText = currentLang === 'en' ? 'RU' : 'EN';
+  langToggle.textContent = toggleText;
+  mobileLangToggle.textContent = toggleText; // update mobile toggle too
   
   // Find all elements with data translation attributes
   const translatableElements = document.querySelectorAll('[data-en][data-ru], [data-en-placeholder][data-ru-placeholder]');
@@ -463,4 +495,14 @@ langToggle.addEventListener('click', () => {
        el.innerHTML = el.getAttribute(`data-${currentLang}`);
     }
   });
+}
+
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'ru' : 'en';
+  applyLanguage();
+});
+
+mobileLangToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'ru' : 'en';
+  applyLanguage();
 });

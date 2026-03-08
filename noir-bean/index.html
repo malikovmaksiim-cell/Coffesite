@@ -31,7 +31,7 @@
         <button id="lang-toggle" class="lang-toggle" aria-label="Toggle Language">RU</button>
         <button class="nav-cta" id="order-btn" data-en="Order Now" data-ru="Заказать">Order Now</button>
       </div>
-      <button class="mobile-menu-btn" aria-label="Toggle Menu">
+      <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -41,6 +41,24 @@
       </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <div class="mobile-menu-header">
+      <div class="logo">Noir Bean</div>
+      <button class="close-mobile-menu" id="close-mobile-menu" aria-label="Close Menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#about" class="mobile-nav-link" data-en="Our Story" data-ru="Наша история">Our Story</a>
+      <a href="#menu" class="mobile-nav-link" data-en="Menu" data-ru="Меню">Menu</a>
+      <a href="#gallery" class="mobile-nav-link" data-en="Atmosphere" data-ru="Атмосфера">Atmosphere</a>
+      <a href="#contact" class="mobile-nav-link" data-en="Contact" data-ru="Контакты">Contact</a>
+    </div>
+    <div class="mobile-nav-actions">
+      <button id="mobile-lang-toggle" class="lang-toggle" aria-label="Toggle Language">RU</button>
+      <button class="nav-cta mobile-order-btn" id="mobile-order-btn" data-en="Order Now" data-ru="Заказать">Order Now</button>
+    </div>
+  </div>
 
   <main>
     <!-- Hero Section -->
