@@ -120,7 +120,8 @@ const mobileMenuOverlay = document.getElementById('mobile-menu');
 const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const mobileLangToggle = document.getElementById('mobile-lang-toggle');
-const mobileOrderBtn = document.getElementById('mobile-order-btn');
+const mobileOverlayOrderBtn = document.getElementById('mobile-overlay-order-btn');
+const mobileHeaderOrderBtn = document.getElementById('mobile-header-order-btn');
 
 function openMobileMenu() {
   mobileMenuOverlay.classList.add('open');
@@ -135,15 +136,18 @@ function closeMobileMenu() {
 mobileMenuBtn.addEventListener('click', openMobileMenu);
 closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
 
-mobileNavLinks.forEach(link => {
+ mobileNavLinks.forEach(link => {
   link.addEventListener('click', closeMobileMenu);
 });
 
-mobileOrderBtn.addEventListener('click', () => {
+mobileOverlayOrderBtn.addEventListener('click', () => {
   closeMobileMenu();
   orderBtn.click(); // Trigger the main order button logic
 });
 
+mobileHeaderOrderBtn.addEventListener('click', () => {
+  orderBtn.click();
+});
 
 // --- Premium Booking Flow Logic ---
 const modal = document.getElementById('order-modal');
