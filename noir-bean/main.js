@@ -191,7 +191,56 @@ window.addEventListener('click', (e) => {
   if (e.target === modal) {
     closeModalLogic();
   }
+  // Also close atmosphere modal if clicking outside it
+  if (e.target === atmosphereModal) {
+    closeAtmosphereModal();
+  }
 });
+
+// --- Atmosphere Interactive Modal ---
+const atmosphereModal = document.getElementById('atmosphere-modal');
+const closeAtmosphereBtn = document.getElementById('close-atmosphere-modal');
+const atmosphereImg = document.getElementById('atmosphere-modal-img');
+const atmosphereTitle = document.getElementById('atmosphere-modal-title');
+const atmosphereDesc = document.getElementById('atmosphere-modal-desc');
+
+let currentAtmosphereItem = null;
+
+const showcaseItems = document.querySelectorAll('.showcase-item');
+showcaseItems.forEach(item => {
+  item.addEventListener('click', () => {
+    currentAtmosphereItem = item;
+    
+    // Inject Image
+    atmosphereImg.src = item.getAttribute('data-modal-img');
+    
+    // Inject Text based on current language
+    updateAtmosphereModalText();
+    
+    atmosphereModal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent scrolling
+  });
+});
+
+function updateAtmosphereModalText() {
+  if (!currentAtmosphereItem) return;
+  
+  if (currentLang === 'en') {
+    atmosphereTitle.textContent = currentAtmosphereItem.getAttribute('data-modal-title-en');
+    atmosphereDesc.textContent = currentAtmosphereItem.getAttribute('data-modal-text-en');
+  } else {
+    atmosphereTitle.textContent = currentAtmosphereItem.getAttribute('data-modal-title-ru');
+    atmosphereDesc.textContent = currentAtmosphereItem.getAttribute('data-modal-text-ru');
+  }
+}
+
+function closeAtmosphereModal() {
+  atmosphereModal.classList.remove('open');
+  document.body.style.overflow = '';
+  currentAtmosphereItem = null;
+}
+
+closeAtmosphereBtn.addEventListener('click', closeAtmosphereModal);
 
 // Custom Date Picker Logic
 let currentDate = new Date(); // Month currently being viewed
@@ -495,6 +544,11 @@ function applyLanguage() {
        el.innerHTML = el.getAttribute(`data-${currentLang}`);
     }
   });
+  
+  // Also update atmosphere modal if it is open
+  if (document.getElementById('atmosphere-modal').classList.contains('open')) {
+    updateAtmosphereModalText();
+  }
 }
 
 langToggle.addEventListener('click', () => {
