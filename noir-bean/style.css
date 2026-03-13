@@ -243,7 +243,9 @@ p { margin-bottom: 1.5rem; max-width: 70ch; }
 
 @media (max-width: 992px) {
   .section-padding { padding: 5rem 0; }
-  .hero-container, .about-container { flex-direction: column; text-align: center; }
+  .hero-container { flex-direction: column; text-align: center; }
+  .about-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+  .about-content { padding-right: 0; }
   .hero-content { align-items: center; display: flex; flex-direction: column; }
   .hero-buttons { justify-content: center; }
   .hero-stats { justify-content: center; width: 100%; }
@@ -267,6 +269,8 @@ p { margin-bottom: 1.5rem; max-width: 70ch; }
   
   /* Left align most text blocks for better mobile reading */
   .section-header { align-items: flex-start; text-align: left; }
+  .about-container { text-align: left; }
+  .about-image::after { padding-bottom: 75%; } /* Landscape crop instead of portrait on mobile */
   .about-content, .origin-content, .location-content { text-align: left; }
   
   .menu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
